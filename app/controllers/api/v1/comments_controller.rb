@@ -1,7 +1,8 @@
 class Api::V1::CommentsController < Api::V1::ApplicationController
-  def index
-    comments = post.comments.page(params[:page])
+  before_action :can_delete?, on: :destroy
 
+  def index
+    comments = post.comments.includes(:commentor).page(params[:page])
     render json: CommentSerializer.new(comments).serializable_hash
   end
 
@@ -11,6 +12,7 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
 
   def create
     comment = post.comments.build(comment_params)
+    comment.commentor = current_user
 
     if comment.save
       render json: CommentSerializer.new(comment).serializable_hash
@@ -42,10 +44,16 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
   end
 
   def post
-    @post ||= current_user.posts.find(params[:post_id])
+    @post ||= Post.find(params[:post_id])
   end
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :parent_id)
+  end
+
+  def can_delete?
+    return if post.creator_id == current_user.id  || comment.commentor_id == current_user.id
+
+    render json: { errors: "permission denied" }, status: :forbidden
   end
 end

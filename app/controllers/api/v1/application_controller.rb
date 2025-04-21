@@ -1,4 +1,6 @@
 class Api::V1::ApplicationController < ApplicationController
+  # include Pundit::Authorization
+
   before_action :authenticate_user
 
   private

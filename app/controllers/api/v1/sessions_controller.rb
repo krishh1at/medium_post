@@ -6,7 +6,7 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
 
     if user&.authenticate(params[:password])
       token = JsonWebToken.encode(user_id: user.id)
-      render json: { token: token }, status: :ok
+      render json: { token: token, user: UserSerializer.new(user).serializable_hash }
     else
       render json: { error: "Invalid credentials" }, status: :unauthorized
     end

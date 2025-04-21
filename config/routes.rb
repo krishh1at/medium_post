@@ -1,17 +1,28 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :categories
-      resources :posts
-      resources :sessions
-      resources :users
+      namespace :admin do
+        resources :categories
+        resources :posts do
+          patch :update_status, on: :member
+        end
+      end
+
+      resources :posts,    only: [:index, :show] do
+        resources :comments
+      end
+
+      resources :sessions, only: [:create, :destroy]
+      resources :users,    only: [:create, :update, :show]
     end
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
+
+  # Serve React frontend for all other paths
+  get '*path', to: 'home#index', constraints: ->(req) do
+    !req.xhr? && req.format.html?
+  end
 
   root "home#index"
 end

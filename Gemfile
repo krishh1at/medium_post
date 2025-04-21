@@ -55,3 +55,11 @@ gem "kaminari", "~> 1.2"
 gem "jsonapi-serializer", "~> 2.2"
 
 gem "webpacker", "~> 5.4"
+
+gem "rack-cors", "~> 2.0"
+
+gem "pundit", "~> 2.5"
+
+gem "image_processing", "~> 1.14"
+
+gem "pry-rails", "~> 0.3.11"

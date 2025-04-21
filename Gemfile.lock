@@ -83,6 +83,7 @@ GEM
     brakeman (7.0.2)
       racc
     builder (3.3.0)
+    coderay (1.1.3)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.1)
     crass (1.0.6)
@@ -96,6 +97,12 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux-musl)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -103,6 +110,9 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    image_processing (1.14.0)
+      mini_magick (>= 4.9.5, < 6)
+      ruby-vips (>= 2.0.17, < 3)
     io-console (0.8.0)
     irb (1.15.2)
       pp (>= 0.6.0)
@@ -148,6 +158,10 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
+    method_source (1.1.0)
+    mini_magick (5.2.0)
+      benchmark
+      logger
     mini_mime (1.1.5)
     minitest (5.25.5)
     msgpack (1.8.0)
@@ -188,14 +202,23 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.4.0)
+    pry (0.15.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.11)
+      pry (>= 0.13.0)
     psych (5.2.3)
       date
       stringio
     puma (6.6.0)
       nio4r (~> 2.0)
+    pundit (2.5.0)
+      activesupport (>= 3.0.0)
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.1.13)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-proxy (0.7.7)
       rack
     rack-session (2.1.0)
@@ -270,6 +293,9 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.2.3)
+      ffi (~> 1.12)
+      logger
     securerandom (0.4.1)
     semantic_range (3.1.0)
     solid_cable (3.0.7)
@@ -334,12 +360,16 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  image_processing (~> 1.14)
   jsonapi-serializer (~> 2.2)
   jwt (~> 2.10)
   kamal
   kaminari (~> 1.2)
   pg (~> 1.1)
+  pry-rails (~> 0.3.11)
   puma (>= 5.0)
+  pundit (~> 2.5)
+  rack-cors (~> 2.0)
   rails (~> 8.0.2)
   rubocop-rails-omakase
   solid_cable

@@ -1,14 +1,18 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { thunk } from 'redux-thunk';
-
+import { configureStore } from '@reduxjs/toolkit';
 import { sessionReducer } from '../reducers/sessions';
 import { postsReducer } from '../reducers/posts';
+import { postReducer } from '../reducers/post';
+import { commentsReducer } from '../reducers/comments';
+import { categoriesReducer } from '../reducers/categories';
 
-const rootReducer = combineReducers({
-  sessions: sessionReducer,
-  posts: postsReducer,
-})
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = configureStore({
+  reducer: {
+    sessions: sessionReducer,
+    posts: postsReducer,
+    post: postReducer,
+    comments: commentsReducer,
+    categories: categoriesReducer,
+  },
+});
 
 export default store;
