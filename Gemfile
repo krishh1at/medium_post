@@ -56,7 +56,7 @@ gem "jsonapi-serializer", "~> 2.2"
 
 gem "webpacker", "~> 5.4"
 
-gem "rack-cors", "~> 2.0"
+gem "rack-cors", "~> 3.0"
 
 gem "pundit", "~> 2.5"
 
